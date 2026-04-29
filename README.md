@@ -13,6 +13,8 @@
 > [!NOTE]
 > This project is implemented as a browser extension focused on `sellers.json` validation workflows. It behaves like an auditing/diagnostics tool for supply-path data rather than a standalone backend library.
 
+https://github.com/user-attachments/assets/8fd51f55-53ff-40a2-866d-74a06b9c70b6
+
 ## Table of Contents
 
 - [Features](#features)
