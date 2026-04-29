@@ -451,8 +451,12 @@ class SellersInspector {
 
     if (!badgeContainer) return;
     badgeContainer.innerHTML =
-      (foundInAds ? `<span class="badge badge-ok">Ads: OK</span>${this.buildAdsLink(domain)}` : '<span class="badge badge-err">Ads: NO</span>') +
-      (foundInAppAds ? '<span class="badge badge-ok">App: OK</span>' : '<span class="badge badge-err">App: NO</span>');
+      (foundInAds
+        ? `<a class="badge badge-ok badge-link-text" href="https://${domain}/ads.txt" target="_blank" rel="noopener noreferrer" title="Open ads.txt">Ads: OK</a>`
+        : '<span class="badge badge-err">Ads: NO</span>') +
+      (foundInAppAds
+        ? `<a class="badge badge-ok badge-link-text" href="https://${domain}/app-ads.txt" target="_blank" rel="noopener noreferrer" title="Open app-ads.txt">App: OK</a>`
+        : '<span class="badge badge-err">App: NO</span>');
   }
 
   async checkBuyerDomain(domain, domainEntryMap) {
@@ -476,8 +480,12 @@ class SellersInspector {
 
     badgeContainers.forEach(node => {
       node.innerHTML =
-        (hasSellersJson ? '<span class="badge badge-ok">Sellers: OK</span>' : '<span class="badge badge-err">Sellers: NO</span>') +
-        (hasBuyersJson ? '<span class="badge badge-ok">Buyers: OK</span>' : '<span class="badge badge-err">Buyers: NO</span>');
+        (hasSellersJson
+          ? `<a class="badge badge-ok badge-link-text" href="https://${domain}/sellers.json" target="_blank" rel="noopener noreferrer" title="Open sellers.json">Sellers: OK</a>`
+          : '<span class="badge badge-err">Sellers: NO</span>') +
+        (hasBuyersJson
+          ? `<a class="badge badge-ok badge-link-text" href="https://${domain}/buyers.json" target="_blank" rel="noopener noreferrer" title="Open buyers.json">Buyers: OK</a>`
+          : '<span class="badge badge-err">Buyers: NO</span>');
     });
   }
 
@@ -491,10 +499,6 @@ class SellersInspector {
     } catch {
       return false;
     }
-  }
-
-  buildAdsLink(domain) {
-    return `<a class="badge-link" href="https://${domain}/ads.txt" target="_blank" rel="noopener noreferrer" title="Open ads.txt"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10.5 1a.5.5 0 0 0 0 1h2.793L8.146 7.146a.5.5 0 1 0 .708.708L14 2.707V5.5a.5.5 0 0 0 1 0v-4a.5.5 0 0 0-.5-.5h-4z"/><path d="M13 8.5a.5.5 0 0 0-1 0V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h4.5a.5.5 0 0 0 0-1H3A2 2 0 0 0 1 5v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8.5z"/></svg></a>`;
   }
 
   injectModalAndTooltip() {
