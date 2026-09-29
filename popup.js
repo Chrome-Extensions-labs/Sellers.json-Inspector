@@ -95,6 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('openSellersBtn')?.addEventListener('click', () => openFileOnCurrentOrigin('sellers.json'));
   document.getElementById('openBuyersBtn')?.addEventListener('click', () => openFileOnCurrentOrigin('buyers.json'));
+  document.getElementById('openCheckerBtn')?.addEventListener('click', () => {
+    chrome.tabs.create({ url: chrome.runtime.getURL('checker.html') });
+  });
 
   document.getElementById('saveBtn')?.addEventListener('click', () => {
     const newConfig = {

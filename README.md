@@ -5,7 +5,7 @@
 [![Chrome Store](https://img.shields.io/badge/platform-Chrome_Extension-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://chromewebstore.google.com/search/OstinUA)
 [![Chrome Portfolio](https://img.shields.io/badge/Chrome_Web_Store-Portfolio-34A853?style=for-the-badge&logo=google-chrome&logoColor=white)](https://ostinua.github.io/Chrome-Web-Store_Developer-List/)
 
-[![Version](https://img.shields.io/badge/version-1.3.3-2ea44f?style=for-the-badge)](manifest.json)
+[![Version](https://img.shields.io/badge/version-1.4.0-2ea44f?style=for-the-badge)](manifest.json)
 [![Manifest](https://img.shields.io/badge/manifest-v3-1f6feb?style=for-the-badge)](manifest.json)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 [![Status](https://img.shields.io/badge/status-stable-6f42c1?style=for-the-badge)](#features)
@@ -55,6 +55,7 @@ https://github.com/user-attachments/assets/8fd51f55-53ff-40a2-866d-74a06b9c70b6
   - Save filtered subset as `.json`
 - Storage-backed runtime preferences via `chrome.storage.local`.
 - Background fetch broker with timeout protection for resilient cross-domain checks.
+- Bulk `seller_id` lookup: paste ads.txt records, check each ID against the exchange domain's `sellers.json`, and copy a per-record report with totals.
 
 > [!TIP]
 > The extension is most useful for SSP/Exchange QA, ad-ops verification, and compliance checks where seller record integrity is critical.
@@ -168,6 +169,9 @@ Manual test checklist:
 2. Open extension popup, modify colors/toggles, click `Save & Reload`, confirm persistence.
 3. Run domain analysis and verify progress bar, badges, and stat counters update.
 4. Click stat labels to open modal and validate copy/export actions.
+5. Click `Check Seller IDs` in the popup, paste ads.txt records, and verify the copied report.
+
+Run the bulk checker logic tests with `node --test tests/checker-core.test.js`.
 
 > [!CAUTION]
 > Domain verification depends on remote host availability and response latency; some failures may be environmental, not functional defects.
@@ -207,6 +211,8 @@ A Docker runtime is typically unnecessary for client-side extension packaging, b
 ### 2) Configure Inspector Preferences
 
 Use the popup to set display behavior and visual palette.
+
+The popup also has a `Check Seller IDs` button. It opens a full tab where you can paste records such as `axonix.com, 57264, RESELLER`. The checker fetches `https://axonix.com/sellers.json` and looks for an exact `seller_id` match. Multiple records for one domain share a single fetch. The copied report includes totals and each record's result; fetch or JSON errors are shown separately from missing IDs. The relationship and optional certification ID are retained in the record but are not used as match criteria.
 
 ```js
 // popup.js (runtime behavior example)

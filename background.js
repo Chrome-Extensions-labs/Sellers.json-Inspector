@@ -101,7 +101,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true; // async response
   }
 
-  // ОБРАБОТКА ПОДСВЕТКИ СИНТАКСИСА
+  // Syntax highlighting
   if (request.action === 'highlight') {
     setTimeout(() => {
       try {

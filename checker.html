@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seller ID Checker — Sellers.json Inspector</title>
+  <link rel="stylesheet" href="checker.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Sellers.json Inspector</div>
+      <h1>Seller ID Checker</h1>
+      <p>Paste ads.txt records below. Each seller ID is matched exactly against the domain's <code>/sellers.json</code> file.</p>
+    </header>
+
+    <section class="card">
+      <label for="entries">Records to check</label>
+      <textarea id="entries" spellcheck="false" placeholder="admanmedia.com, 1063, RESELLER&#10;axonix.com, 57264, RESELLER&#10;axonix.com, 59215, RESELLER, bc385f2b4a87b721"></textarea>
+      <div class="input-footer">
+        <span>Paste one record per line or a space-separated list. The fourth field is optional.</span>
+        <button id="checkBtn" class="primary">Check IDs</button>
+      </div>
+    </section>
+
+    <section class="card" id="resultsSection" hidden aria-live="polite">
+      <div class="result-heading">
+        <div>
+          <h2>Results</h2>
+          <p id="progress"></p>
+        </div>
+        <button id="copyBtn" disabled>Copy Report</button>
+      </div>
+      <div class="stats">
+        <div><strong id="totalCount">0</strong><span>Total</span></div>
+        <div><strong id="foundCount">0</strong><span>Found</span></div>
+        <div><strong id="missingCount">0</strong><span>ID Missing</span></div>
+        <div><strong id="errorCount">0</strong><span>Errors</span></div>
+        <div><strong id="invalidCount">0</strong><span>Invalid Format</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Status</th><th>Record</th><th>Domain / file</th><th>Details</th></tr></thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <script src="checker-core.js"></script>
+  <script src="checker.js"></script>
+</body>
+</html>
