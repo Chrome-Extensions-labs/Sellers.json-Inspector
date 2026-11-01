@@ -3,6 +3,7 @@
   "name": "Sellers.json Inspector",
   "version": "1.4.0",
   "description": "Parsing, highlighting, and analysis of sellers.json and buyers.json files with IAB-spec ads.txt validation.",
+  "homepage_url": "https://github.com/Chrome-Extensions-labs/Sellers.json-Inspector",
   "permissions": [
     "storage"
   ],
